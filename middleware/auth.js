@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
     req.userId = decodedData?._id;
     next();
   } catch (e) {
-    console.log(e);
+    return res.status(403).json({ error: e });
   }
 };
 
