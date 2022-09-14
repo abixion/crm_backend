@@ -12,6 +12,7 @@ const login = async (req, res) => {
     }
 
     if (await comparePassword(password, user?.password)) {
+      // eslint-disable-next-line no-underscore-dangle,no-unsafe-optional-chaining
       const { password: hidePass, ...formattedUser } = user?._doc;
       res.status(200).json({ message: 'Login successful', user: formattedUser });
     } else {
@@ -31,6 +32,7 @@ export const register = async (req, res) => {
     newUser.password = bcrypt.hashSync(newUser.password, salt);
     await newUser.save();
 
+    // eslint-disable-next-line no-underscore-dangle,no-unsafe-optional-chaining
     const { password: hidePass, ...formattedUser } = newUser?._doc;
     res.status(201).json({ message: 'New user registered successfully', user: formattedUser });
   } catch (error) {
