@@ -16,6 +16,13 @@
             {
                 "js": "ignorePackages"
             }
-        ]
+        ],
+        "indent": ["error", 2, { "SwitchCase": 1 }],
+        "no-mixed-spaces-and-tabs": "warn",
+        "space-before-blocks": "error",
+        "space-in-parens": "error",
+        "space-infix-ops": "error",
+        "space-unary-ops": "error",
+        "quotes": ["error", "single"]
     }
 }

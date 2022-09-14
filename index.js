@@ -1,23 +1,22 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
+import db from './config/config.js';
 
 const app = express();
-
-dotenv.config();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
-const DBUserName = process.env.DATABASE_USERNAME;
-const DBPassword = process.env.DATABASE_PASSWORD;
+const DBUserName = db.DATABASE_USERNAME;
+const DBPassword = db.DATABASE_PASSWORD;
+const DBCluster = db.DATABASE_CLUSTER;
 
-const CONNECTION_URL = `mongodb+srv://${DBUserName}:${DBPassword}@clusterreactjs.82nlr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const CONNECTION_URL = `mongodb+srv://${DBUserName}:${DBPassword}@${DBCluster}.82nlr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
