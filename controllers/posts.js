@@ -1,11 +1,12 @@
+import { StatusCodes } from 'http-status-codes';
 import PostMessage from '../models/postMessage.js';
 
 const getPosts = async (req, res) => {
   try {
     const posts = await PostMessage.find();
-    res.status(200).json(posts);
+    res.status(StatusCodes.OK).json(posts);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
@@ -16,9 +17,9 @@ export const createPost = async (req, res) => {
   try {
     await newPost.save();
 
-    res.status(201).json({ message: 'New post created', post: newPost });
+    res.status(StatusCodes.CREATED).json({ message: 'New post created', post: newPost });
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
