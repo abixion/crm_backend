@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { StatusCodes } from 'http-status-codes';
 import User, { verifyPassword, createToken } from '../models/User.js';
 
 const login = async (req, res) => {
@@ -15,11 +16,11 @@ const login = async (req, res) => {
       const { password: hidePass, ...userProfile } = user?._doc;
       // eslint-disable-next-line no-underscore-dangle
       userProfile.token = createToken(user.email, user._id);
-      return res.status(200).json({ message: 'Login successful', user: userProfile });
+      return res.status(StatusCodes.OK).json({ message: 'Login successful', user: userProfile });
     }
-    return res.status(400).json({ message: 'Invalid email or password' });
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid email or password' });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
@@ -42,9 +43,9 @@ export const register = async (req, res) => {
     const { password: hidePass, ...userProfile } = newUser?._doc;
     // eslint-disable-next-line no-underscore-dangle
     userProfile.token = createToken(newUser.email, newUser._id);
-    return res.status(201).json({ message: 'New user registered successfully', user: userProfile });
+    return res.status(StatusCodes.CREATED).json({ message: 'New user registered successfully', user: userProfile });
   } catch (error) {
-    return res.status(409).json({ message: error.message });
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: error.message });
   }
 };
 

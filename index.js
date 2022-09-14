@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import { StatusCodes } from 'http-status-codes';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
 import db from './config/config.js';
@@ -26,5 +27,5 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
 app.use('/', (req, res) => {
-  res.status(200).json({ message: `Server is running on ${PORT} `, routes: 'posts' });
+  res.status(StatusCodes.OK).json({ message: `Server is running on ${PORT} `, routes: 'posts' });
 });
