@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { jwtConfig } from '../config/config.js';
 
 const userSchema = mongoose.Schema({
   firstName: {
@@ -38,10 +40,12 @@ const userSchema = mongoose.Schema({
   },
 });
 
-export const comparePassword = async (inputPassword, userPassword) => {
+export const verifyPassword = async (inputPassword, userPassword) => {
   const compare = await bcrypt.compare(inputPassword, userPassword);
   return compare;
 };
+
+export const createToken = (email, _id) => jwt.sign({ email, _id }, `${jwtConfig.secret}`, { expiresIn: '10h' });
 
 const User = mongoose.model('User', userSchema);
 

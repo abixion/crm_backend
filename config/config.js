@@ -7,4 +7,8 @@ const db = {
   DATABASE_CLUSTER: process.env.DATABASE_CLUSTER ?? '',
 };
 
+export const jwtConfig = {
+  secret: process.env.JWT_SECRET ?? '',
+};
+
 export default db;
