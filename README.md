@@ -3,6 +3,8 @@
 
 > CRM having capabilities of multiple franchises and dealing with clients and their invoices.
 
+> Deployed at Cyclic https://upset-baseball-cap-fish.cyclic.app/
+
 ## Getting started
 
 - Recommended `node js 14.x` and `npm 6+`. (suggestion v14.17.3 / v16.15.0)
