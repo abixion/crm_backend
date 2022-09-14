@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
+    "start:local": "nodemon index.js",
     "lint": "eslint . --ext js,jsx,ts,tsx --fix"
   },
   "keywords": [],
