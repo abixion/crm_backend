@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
         }
         return true;
       },
-      message: (props) => 'The specified email address is already in use.',
+      message: () => 'The specified email address is already in use.',
     },
   },
   password: {
