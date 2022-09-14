@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRoutes from "./routes/posts.js";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: tru
     .catch((err) => console.log(err));
 
 app.use('/posts', postRoutes);
+app.use('/auth', authRoutes);
 app.use('/', (req, res) => {
     res.status(200).json({'message': `Server is running on ${PORT} `, 'routes': 'posts'});
 });
