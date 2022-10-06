@@ -5,6 +5,7 @@ import cors from 'cors';
 import { StatusCodes } from 'http-status-codes';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
 import db from './config/config.js';
 
 const app = express();
@@ -24,8 +25,9 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
   .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT} with Mongo !!!`)))
   .catch((err) => console.log(err));
 
-app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
+app.use('/posts', postRoutes);
+app.use('/users', userRoutes);
 app.use('/', (req, res) => {
   res.status(StatusCodes.OK).json({ message: `Server is running on ${PORT} `, routes: 'posts' });
 });
