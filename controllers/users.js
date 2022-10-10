@@ -24,10 +24,9 @@ export const createUser = async (req, res) => {
   const newUser = new User(body);
   try {
     const existingUser = await User.findOne({
-      $or: [{
-        email,
-        phone,
-      }],
+      $or: [{ email },
+        { phone },
+      ],
     });
     if (existingUser) {
       let message;
@@ -40,10 +39,12 @@ export const createUser = async (req, res) => {
       } else {
         message = 'User already exists.';
       }
-      return res.send({ message, error: true }).status(422);
+
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message, error: true });
     }
 
-    const password = Math.random();
+    const password = Math.random().toString();
+    console.log(body, password);
     const salt = await bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password, salt);
     await newUser.save();
